@@ -25,7 +25,8 @@ public class TeamController : MonoBehaviour
     {
         foreach (var player in players)
         {
-            player.RunTowardsBall();
+            if (player.role == "Attacker")
+                player.RunTowardsBall();
         }
     }
 
@@ -35,6 +36,20 @@ public class TeamController : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             SoccerPlayer player = Instantiate(soccerPlayerPrefab, startingPositions[i], soccerPlayerPrefab.transform.rotation);
+
+            if (i == 0)
+            {
+                player.role = "Goalkeeper";
+            }
+            else if (i == 1 || i == 2)
+            {
+                player.role = "Defender";
+            }
+            else
+            {
+                player.role = "Attacker";
+            }
+
             players[i] = player;
         }
     }
