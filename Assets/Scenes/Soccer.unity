@@ -547,12 +547,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soccerPlayerPrefab: {fileID: 529692811474576412, guid: 01f6ed14242e3f204bb16e779ee86668, type: 3}
   startingPositions:
-  - {x: -470, y: 0, z: 0}
-  - {x: -275, y: 0, z: 140}
-  - {x: -275, y: 0, z: -140}
-  - {x: -110, y: 0, z: 220}
-  - {x: -110, y: 0, z: 0}
-  - {x: -110, y: 0, z: -220}
+  - {x: -470, y: 20, z: 0}
+  - {x: -275, y: 20, z: 140}
+  - {x: -275, y: 20, z: -140}
+  - {x: -110, y: 20, z: 220}
+  - {x: -110, y: 20, z: 0}
+  - {x: -110, y: 20, z: -220}
 --- !u!4 &1214067452
 Transform:
   m_ObjectHideFlags: 0
