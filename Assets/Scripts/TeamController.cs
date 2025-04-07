@@ -23,13 +23,31 @@ public class TeamController : MonoBehaviour
 
     private void Update()
     {
+        SoccerPlayer player = GetPlayerClosestToBall();
+        player.RunTowardsBall();
+
+    }
+
+    SoccerPlayer GetPlayerClosestToBall()
+    {
+        float minDistance = float.PositiveInfinity;
+        float distance;
+        SoccerPlayer closestPlayer = players[0];
         foreach (var player in players)
         {
             if (player.role == "Attacker")
-                player.RunTowardsBall();
+            {
+                distance = player.GetDistanceFromBall();
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestPlayer = player;
+                }
+            }
         }
-    }
 
+        return closestPlayer;
+    }
 
     void SpawnPlayers()
     {
