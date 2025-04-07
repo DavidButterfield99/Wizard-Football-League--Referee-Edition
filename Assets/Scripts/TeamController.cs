@@ -25,8 +25,7 @@ public class TeamController : MonoBehaviour
     {
         foreach (var player in players)
         {
-            player.transform.LookAt(ball.transform);
-            player.transform.Translate(Vector3.forward * player.speedMax * Time.deltaTime);
+            player.RunTowardsBall();
         }
     }
 
