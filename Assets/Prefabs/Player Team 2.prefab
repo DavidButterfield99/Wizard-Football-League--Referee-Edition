@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7177308159850203825}
   - component: {fileID: 529692811474576412}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player Team 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 22a262632173122289541f81e88c90f7, type: 2}
+  - {fileID: 2100000, guid: e5ceb22d854ea902db700791cd18f7fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,7 +137,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &529692811474576412
 MonoBehaviour:
@@ -156,5 +156,5 @@ MonoBehaviour:
   strength: 50
   speedMax: 50
   acceleration: 50
-  team: 
+  team: 2
   role: 
