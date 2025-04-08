@@ -151,3 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e258b3e0e0f399e83ac37a7e5e05b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellCasting: 0
+  healthPoints: 50
+  strength: 50
+  speedMax: 50
+  acceleration: 50
+  team: 
+  role: 
