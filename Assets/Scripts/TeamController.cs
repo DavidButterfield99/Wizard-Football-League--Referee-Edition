@@ -41,13 +41,22 @@ public class TeamController : MonoBehaviour
                 }
             }
 
-            if (player.role == "Defender" )
+            if (player.role == "Defender")
             {
                 player.RunTowardsBall();
             }
 
-        }
+            if (Random.Range(0, 100) == 0)
+            {
+                if (player.spellcasting == null)
+                {
+                    Debug.Log("spellcasting is null");
+                    return;
+                }
 
+                player.spellcasting.CastSpell(player.spellcasting.spells[0], player.transform.position);
+            }
+        }
     }
 
     SoccerPlayer GetPlayerClosestToBall()
