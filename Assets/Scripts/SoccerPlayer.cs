@@ -5,11 +5,11 @@ public class SoccerPlayer : MonoBehaviour
     GameObject ball;
     Rigidbody ballRb;
     Rigidbody playerRb;
-    public float spellCasting;
-    public float healthPoints = 50f;
-    public float strength = 50f;
-    public float speedMax = 350f;
-    public float acceleration = 50f;
+    float spellCasting;
+    float healthPoints = 50f;
+    float strength = 50f;
+    float speedMax = 350f;
+    float acceleration = 50f;
     public string team;
     public string role;
     public int defenceZone; // 1 or 2
