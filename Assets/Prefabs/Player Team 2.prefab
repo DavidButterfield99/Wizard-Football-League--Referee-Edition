@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4176570388991085474}
   - component: {fileID: 7177308159850203825}
   - component: {fileID: 529692811474576412}
+  - component: {fileID: -2220123393852672370}
   m_Layer: 0
   m_Name: Player Team 2
   m_TagString: Player
@@ -137,7 +138,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &529692811474576412
 MonoBehaviour:
@@ -151,12 +152,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e258b3e0e0f399e83ac37a7e5e05b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellCasting: 0
-  healthPoints: 50
-  strength: 50
-  speedMax: 50
-  acceleration: 50
   team: 2
   role: 
   defenceZone: 0
   goalObject: {fileID: 0}
+  spellcasting: {fileID: 0}
+--- !u!114 &-2220123393852672370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489471571933385550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90ce6c3b3a3956f79b14a9ff56fb567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellPrefab: {fileID: 8335565284932082856, guid: 02cb5d4c84964264794bcfe4cf58ee87, type: 3}
+  spells:
+  - {fileID: 11400000, guid: 3eae67b4232d3a386a4e522205ba617b, type: 2}

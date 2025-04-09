@@ -21,13 +21,16 @@ public class SoccerPlayer : MonoBehaviour
     private Vector3 moveDirection;
 
     public GameObject goalObject;
+    public Spellcasting spellcasting;
 
 
-    private void Start()
+
+    private void Awake()
     {
         ball = GameObject.Find("Ball");
         ballRb = ball.GetComponent<Rigidbody>();
         playerRb = GetComponent<Rigidbody>();
+        spellcasting = GetComponent<Spellcasting>();
         GenerateStats(90);
     }
 
