@@ -4,6 +4,7 @@ using UnityEngine;
 public class TeamController : MonoBehaviour
 {
     GameObject ball;
+    public GameObject goalObject;
     public SoccerPlayer soccerPlayerPrefab;
     SoccerPlayer[] players = new SoccerPlayer[6];
     public Vector3[] startingPositions = new Vector3[6];
@@ -69,7 +70,8 @@ public class TeamController : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             SoccerPlayer player = Instantiate(soccerPlayerPrefab, startingPositions[i], soccerPlayerPrefab.transform.rotation);
-            
+            player.goalObject = goalObject;
+
             if (i == 0)
             {
                 player.role = "Goalkeeper";
