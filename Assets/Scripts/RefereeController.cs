@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RefereeController : MonoBehaviour
 {
-    public float speed = 50f;
+    public float speed = 250f;
     private float horizontalInput;
     private float verticalInput;
 
@@ -21,5 +21,13 @@ public class RefereeController : MonoBehaviour
 
         Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput);
         transform.Translate(moveDirection * speed * Time.deltaTime);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Game over!");
+        }
     }
 }
