@@ -13,8 +13,6 @@ public class SpellDisplay : MonoBehaviour {
 
     public void SpawnSpellCircle(SpellSO spellToCast)
     {
-        Debug.Log($"rend == {rend != null}");
-        Debug.Log($"Spawning {spellToCast.spellName}");
         if (spellToCast.spellType == "Buff")
         {
             rend.sprite = spellCircles[0];
