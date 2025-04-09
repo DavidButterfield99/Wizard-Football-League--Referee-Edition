@@ -40,6 +40,12 @@ public class TeamController : MonoBehaviour
                     player.RunTowardsBall();
                 }
             }
+
+            if (player.role == "Defender" )
+            {
+                player.RunTowardsBall();
+            }
+
         }
 
     }
@@ -79,6 +85,7 @@ public class TeamController : MonoBehaviour
             else if (i == 1 || i == 2)
             {
                 player.role = "Defender";
+                player.defenceZone = i;
             }
             else
             {
