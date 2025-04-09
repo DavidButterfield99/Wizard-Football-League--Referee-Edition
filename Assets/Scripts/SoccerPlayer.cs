@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SoccerPlayer : MonoBehaviour
@@ -5,11 +7,7 @@ public class SoccerPlayer : MonoBehaviour
     GameObject ball;
     Rigidbody ballRb;
     Rigidbody playerRb;
-    float spellCasting;
-    float healthPoints = 50f;
-    float strength = 50f;
-    float speedMax = 350f;
-    float acceleration = 50f;
+    Dictionary<string, float> stats = new Dictionary<string, float>(); 
     public string team;
     public string role;
     public int defenceZone; // 1 or 2
@@ -30,7 +28,7 @@ public class SoccerPlayer : MonoBehaviour
         ball = GameObject.Find("Ball");
         ballRb = ball.GetComponent<Rigidbody>();
         playerRb = GetComponent<Rigidbody>();
-
+        GenerateStats(90);
     }
 
 
@@ -67,7 +65,7 @@ public class SoccerPlayer : MonoBehaviour
 
         if (isBallBlocking)
         {
-            moveDirection = behindBall + (Vector3.right * speedMax * Time.deltaTime);
+            moveDirection = behindBall + (Vector3.right * stats["speedMax"] * Time.deltaTime);
         }
 
         if (role == "Defender")
@@ -89,7 +87,7 @@ public class SoccerPlayer : MonoBehaviour
 
         moveDirection.y = 20;
         transform.LookAt(moveDirection);
-        transform.Translate(Vector3.forward * speedMax * Time.deltaTime);
+        transform.Translate(Vector3.forward * stats["speedMax"] * Time.deltaTime);
     }
 
     public void KickBall()
@@ -98,8 +96,35 @@ public class SoccerPlayer : MonoBehaviour
         if (!isBallBlocking)
         {
             Debug.Log("Kicking ball!");
-            ballRb.AddForce(kickDirection * strength / forceDivider, ForceMode.Impulse);
+            ballRb.AddForce(kickDirection * stats["strength"] / forceDivider, ForceMode.Impulse);
         }
+    }
+
+    public void GenerateStats(int maxVal)
+    {
+        stats.Add("spellCasting", 0);
+        stats.Add("healthPoints", 0);
+        stats.Add("strength", 0);
+        stats.Add("speedMax", 0);
+        stats.Add("acceleration", 0);
+        stats.Add("Defense", 0);
+        
+        for (int i = 0; i < maxVal * stats.Count; i++)
+        {
+            
+            var element = stats.ElementAt(Random.Range(0,stats.Count));
+            if (stats[element.Key] == 100)
+            {
+                continue;
+            }
+            stats[element.Key]++;
+        }
+
+        foreach (var item in stats)
+        {
+            Debug.Log($"{item.Key}: {item.Value}");
+        }
+
     }
 
 }
