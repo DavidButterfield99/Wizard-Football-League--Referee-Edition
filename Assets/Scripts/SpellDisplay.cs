@@ -76,14 +76,9 @@ public class SpellDisplay : MonoBehaviour
         }
         catch 
         { }
-        if (other.gameObject.tag.Contains("Team") && spellActive)
+        if (other.gameObject.CompareTag("Player") && spellActive)
         {
-            // Debug.Log("Colliding");
-
+            GameManager.gameOver = true;
         }
-        
-
-        
     }
-
 }

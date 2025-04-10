@@ -24,6 +24,10 @@ public class TeamController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.gameOver)
+        {
+            return;
+        }
         SoccerPlayer closestPlayer = GetPlayerClosestToBall();
         closestPlayer.RunTowardsBall();
 

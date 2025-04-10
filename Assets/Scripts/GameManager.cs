@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     List<SpellDisplay> activeSpells;
     public int activeSpellCount;
     public int maxActiveSpells = 4;
+    static public bool gameOver = false;
 
     void Start()
     {
@@ -28,6 +29,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (gameOver)
+        {
+            return;
+        }
         activeSpells = getActiveSpells();
         activeSpellCount = activeSpells.Count;
 
