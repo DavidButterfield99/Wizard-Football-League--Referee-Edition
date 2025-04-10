@@ -11,6 +11,7 @@ public class SpellDisplay : MonoBehaviour {
 
 
 
+
     public void SpawnSpellCircle(SpellSO spellToCast)
     {
         if (spellToCast.spellType == "Buff")
@@ -30,6 +31,9 @@ public class SpellDisplay : MonoBehaviour {
             // Must be Summon spell type
             rend.sprite = spellCircles[3];
         }
+
+        rend.color = spellToCast.color;
         
+            
     }
 }
