@@ -32,6 +32,7 @@ public class Spellcasting : MonoBehaviour
         float spellcastingDelay = 100 / spell.caster.stats["spellCasting"];
 
         yield return new WaitForSeconds(spellcastingDelay);
+        spell.caster.isCasting = false;
 
         List<SoccerPlayer> targets = spell.caster.GetValidSpellTargets();
         int randomIndex = Random.Range(0, targets.Count);

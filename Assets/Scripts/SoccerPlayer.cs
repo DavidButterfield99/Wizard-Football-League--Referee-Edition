@@ -7,7 +7,7 @@ public class SoccerPlayer : MonoBehaviour
     GameObject ball;
     Rigidbody ballRb;
     Rigidbody playerRb;
-    public Dictionary<string, float> stats = new Dictionary<string, float>(); 
+    public Dictionary<string, float> stats = new Dictionary<string, float>();
     public string team;
     public string role;
     public int defenceZone; // 1 or 2
@@ -22,6 +22,8 @@ public class SoccerPlayer : MonoBehaviour
 
     public GameObject goalObject;
     public Spellcasting spellcasting;
+    public bool isCasting = false;
+    public int foulsNum = 0;
 
     private GameManager gameManager;
 
@@ -113,11 +115,11 @@ public class SoccerPlayer : MonoBehaviour
         stats.Add("speedMax", 0);
         stats.Add("acceleration", 0);
         stats.Add("Defense", 0);
-        
+
         for (int i = 0; i < maxVal * stats.Count; i++)
         {
-            
-            var element = stats.ElementAt(Random.Range(0,stats.Count));
+
+            var element = stats.ElementAt(Random.Range(0, stats.Count));
             if (stats[element.Key] == 100)
             {
                 continue;
@@ -137,10 +139,21 @@ public class SoccerPlayer : MonoBehaviour
             {
                 targets.Add(player);
             }
-        
+
         }
-        
+
         return targets;
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("OnMouseDown");
+        
+            if (isCasting)
+            {
+                foulsNum++;
+            }
+        
     }
 
 }

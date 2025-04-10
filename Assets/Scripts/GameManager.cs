@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        #if UNITY_EDITOR
+        gameOver = false;
+        #endif
         if (gameOver)
         {
             return;
