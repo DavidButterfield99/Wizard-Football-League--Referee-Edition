@@ -6,9 +6,6 @@ public class RefereeController : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
 
-    private bool gameOver = false;
-    private bool canMove = true;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +16,7 @@ public class RefereeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameOver)
+        if (!GameManager.gameOver)
         {
             horizontalInput = Input.GetAxis("Horizontal");
             verticalInput = Input.GetAxis("Vertical");
@@ -35,6 +32,9 @@ public class RefereeController : MonoBehaviour
         if (collision.gameObject.tag.Contains("Team"))
         {
             Debug.Log("Game over!");
+            GameManager.gameOver = true;
         }
     }
+    
+
 }

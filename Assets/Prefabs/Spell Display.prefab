@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7869645647359573939}
   - component: {fileID: 6966230959647436680}
   - component: {fileID: 8335565284932082856}
+  - component: {fileID: -807966309063904677}
+  - component: {fileID: 7008960904099436055}
   m_Layer: 0
   m_Name: Spell Display
   m_TagString: Spell
@@ -112,3 +114,54 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8148154228d1e0a47ac380b10fa04f9b, type: 3}
   - {fileID: 21300000, guid: 27428353eebc9c24184addfac12b8f71, type: 3}
   - {fileID: 21300000, guid: d9f50afecf125fd45982caf2bb21141e, type: 3}
+  spellSO: {fileID: 0}
+  caster: {fileID: 0}
+  target: {fileID: 0}
+--- !u!65 &-807966309063904677
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559630431153737971}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7008960904099436055
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559630431153737971}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0

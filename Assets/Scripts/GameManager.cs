@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     GameObject[] team2;
     public List<GameObject> allPlayers;
     List<SpellDisplay> activeSpells;
+    public int activeSpellCount;
+    public int maxActiveSpells = 4;
+    static public bool gameOver = false;
 
     void Start()
     {
@@ -15,7 +18,6 @@ public class GameManager : MonoBehaviour
         team2 = GameObject.FindGameObjectsWithTag("Team 2");
         foreach (var player in team1)
         {
-            Debug.Log(player);
             allPlayers.Add(player);
         }
 
@@ -27,15 +29,27 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        #if UNITY_EDITOR
+        gameOver = false;
+        #endif
+        if (gameOver)
+        {
+            return;
+        }
         activeSpells = getActiveSpells();
+        activeSpellCount = activeSpells.Count;
 
         foreach (SpellDisplay spell in activeSpells)
         {
-            if (spell.spellSO.spellType == "Attack")
+            try
             {
-                Debug.Log($"spell.caster: {spell.caster}, spell.target: {spell.target}");
-                spell.HomeOnPlayer(spell.caster, spell.target);
+                if (spell.spellSO.spellType == "Attack")
+                {
+                    spell.HomeOnPlayer(spell.caster, spell.target);
+                }
+
             }
+            catch { }
         }
     }
 
