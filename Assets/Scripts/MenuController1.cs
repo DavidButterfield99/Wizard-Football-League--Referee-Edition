@@ -28,17 +28,14 @@ public class MenuController1 : MonoBehaviour
             creditsPanelAnimator = creditsPanel.GetComponent<Animator>();
             creditsPanelAnimator.SetBool("_isOpen", false);
         }
+
         if (settingsPanel != null) {
             settingsPanelAnimator = settingsPanel.GetComponent<Animator>();
             settingsPanelAnimator.SetBool("_isOpen", false);
-            settingsResolutionDropdown.ClearOptions();
-            List<string> options = new List<string>();
-            for (int i = 0; i < resolutions.Length; i++) {
-                string option = resolutions[i].width + " x " + resolutions[i].height;
-                options.Add(option);
-            }
-            settingsResolutionDropdown.AddOptions(options);
+
+            SetUpResolutionsSettings();
         }
+
         if (howToPlayPanel != null) {
             howToPlayPanelAnimator = howToPlayPanel.GetComponent<Animator>();
             howToPlayPanelAnimator.SetBool("_isOpen", false);
@@ -69,6 +66,26 @@ public class MenuController1 : MonoBehaviour
 
     public void SettingFullscreen(bool isFullscreen) {
         Screen.fullScreen = isFullscreen;
+    }
+
+    private void SetUpResolutionsSettings() {
+        settingsResolutionDropdown.ClearOptions();
+        List<string> options = new List<string>();
+        int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++) {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            options.Add(option);
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height) {
+                currentResolutionIndex = i;
+            }
+        }
+        settingsResolutionDropdown.AddOptions(options);
+        settingsResolutionDropdown.value = currentResolutionIndex;
+        settingsResolutionDropdown.RefreshShownValue();
+    }
+
+    public void SetResolutionSettings(int resolutionIndex) {
+        Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height, Screen.fullScreen);
     }
 
     //How to play functions go here
