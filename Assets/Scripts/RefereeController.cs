@@ -30,7 +30,7 @@ public class RefereeController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.tag.Contains("Team"))
         {
             Debug.Log("Game over!");
         }

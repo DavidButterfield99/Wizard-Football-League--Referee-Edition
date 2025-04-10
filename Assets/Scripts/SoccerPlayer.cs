@@ -7,7 +7,7 @@ public class SoccerPlayer : MonoBehaviour
     GameObject ball;
     Rigidbody ballRb;
     Rigidbody playerRb;
-    Dictionary<string, float> stats = new Dictionary<string, float>(); 
+    public Dictionary<string, float> stats = new Dictionary<string, float>(); 
     public string team;
     public string role;
     public int defenceZone; // 1 or 2
@@ -23,6 +23,8 @@ public class SoccerPlayer : MonoBehaviour
     public GameObject goalObject;
     public Spellcasting spellcasting;
 
+    private GameManager gameManager;
+
 
 
     private void Awake()
@@ -31,6 +33,7 @@ public class SoccerPlayer : MonoBehaviour
         ballRb = ball.GetComponent<Rigidbody>();
         playerRb = GetComponent<Rigidbody>();
         spellcasting = GetComponent<Spellcasting>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         GenerateStats(90);
     }
 
@@ -98,7 +101,6 @@ public class SoccerPlayer : MonoBehaviour
         Vector3 kickDirection = ball.transform.position - transform.position;
         if (!isBallBlocking)
         {
-            Debug.Log("Kicking ball!");
             ballRb.AddForce(kickDirection * stats["strength"] / forceDivider, ForceMode.Impulse);
         }
     }
@@ -122,12 +124,23 @@ public class SoccerPlayer : MonoBehaviour
             }
             stats[element.Key]++;
         }
+    }
 
-        foreach (var item in stats)
+    public List<SoccerPlayer> GetValidSpellTargets()
+    {
+        List<SoccerPlayer> targets = new List<SoccerPlayer>();
+
+        for (int i = 0; i < gameManager.allPlayers.Count; i++)
         {
-            Debug.Log($"{item.Key}: {item.Value}");
+            SoccerPlayer player = gameManager.allPlayers[i].GetComponent<SoccerPlayer>();
+            if (player.team != team)
+            {
+                targets.Add(player);
+            }
+        
         }
-
+        
+        return targets;
     }
 
 }
