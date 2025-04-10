@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,15 @@ public class GameManager : MonoBehaviour
     public List<GameObject> allPlayers;
     List<SpellDisplay> activeSpells;
     public int activeSpellCount;
-    public int maxActiveSpells = 4;
+    public int maxActiveBuffs = 4;
+    public int maxActiveSummons = 2;
+    public int activeBuffs = 0;
+    public int activeSUmmons = 0;
     static public bool gameOver = false;
+
+    private List<SoccerPlayer> playerPoolCurrent = new List<SoccerPlayer>();
+    private List<SpellSO> SpellsPoolOriginal = new List<SpellSO>();
+    private List<SpellSO> SpellsPoolCurrent = new List<SpellSO>();
 
     void Start()
     {
@@ -25,13 +33,15 @@ public class GameManager : MonoBehaviour
         {
             allPlayers.Add(player);
         }
+
+        StartCoroutine("spellcastCoroutine");
     }
 
     void Update()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         gameOver = false;
-        #endif
+#endif
         if (gameOver)
         {
             return;
@@ -53,7 +63,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public IEnumerator spellcastCoroutine()
+    {
+        int waitTime = Random.Range(10, 20);
+        yield return new WaitForSeconds(waitTime);
 
+        Debug.Log(playerPoolCurrent.Count);
+        int selection = Random.Range(0, playerPoolCurrent.Count);
+        SoccerPlayer player = playerPoolCurrent[selection];
+        playerPoolCurrent.RemoveAt(selection);
+
+
+        player.spellcasting.CastSpell(player.spellcasting.spells[0], player);
+        player.isCasting = true;
+    }
 
     List<SpellDisplay> getActiveSpells()
     {

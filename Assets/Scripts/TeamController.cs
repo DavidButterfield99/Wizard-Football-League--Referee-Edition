@@ -48,12 +48,6 @@ public class TeamController : MonoBehaviour
             {
                 player.RunTowardsBall();
             }
-
-            if (Random.Range(0, 1000) == 0)
-            {
-                player.spellcasting.CastSpell(player.spellcasting.spells[0], player);
-                player.isCasting = true;
-            }   
         }
     }
 

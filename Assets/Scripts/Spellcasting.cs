@@ -15,16 +15,11 @@ public class Spellcasting : MonoBehaviour
 
     public void CastSpell(SpellSO spellToCast, SoccerPlayer caster)
     {
-        if (gameManager.activeSpellCount < gameManager.maxActiveSpells)
-        {
+        SpellDisplay spell = InstantiateSpell(spellToCast, caster);
+        spell.SpawnSpellCircle(spellToCast);
+        spell.transform.SetParent(caster.transform);
 
-            SpellDisplay spell = InstantiateSpell(spellToCast, caster);
-            spell.SpawnSpellCircle(spellToCast);
-            spell.transform.SetParent(caster.transform);
-
-            StartCoroutine(pendingCast(spell));
-        }
-
+        StartCoroutine(pendingCast(spell));
     }
 
     public IEnumerator pendingCast(SpellDisplay spell)
