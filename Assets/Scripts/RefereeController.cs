@@ -7,6 +7,7 @@ public class RefereeController : MonoBehaviour
     private float verticalInput;
 
     private bool gameOver = false;
+    private bool canMove = true;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,6 +27,7 @@ public class RefereeController : MonoBehaviour
             Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput);
             transform.Translate(moveDirection * speed * Time.deltaTime);
         }
+        
     }
 
     void OnCollisionEnter(Collision collision)

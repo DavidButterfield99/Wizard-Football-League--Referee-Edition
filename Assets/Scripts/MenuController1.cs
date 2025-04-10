@@ -10,7 +10,8 @@ public class MenuController1 : MonoBehaviour
     
     public GameObject settingsPanel;
     private Animator settingsPanelAnimator;
-    Resolution[] resolutions;
+    public int[] resolutionsWidth;
+    public int[] resolutionsHeight;
     public Dropdown settingsResolutionDropdown;
 
     public GameObject howToPlayPanel;
@@ -23,7 +24,6 @@ public class MenuController1 : MonoBehaviour
     
     void Start()
     {
-        resolutions = Screen.resolutions;
         if (creditsPanel != null) {
             creditsPanelAnimator = creditsPanel.GetComponent<Animator>();
             creditsPanelAnimator.SetBool("_isOpen", false);
@@ -33,10 +33,11 @@ public class MenuController1 : MonoBehaviour
             settingsPanelAnimator = settingsPanel.GetComponent<Animator>();
             settingsPanelAnimator.SetBool("_isOpen", false);
 
-            SetUpResolutionsSettings();
+            InitializeResolutionsSettings();
         }
 
         if (howToPlayPanel != null) {
+            Debug.Log("I am initializing how to play!");
             howToPlayPanelAnimator = howToPlayPanel.GetComponent<Animator>();
             howToPlayPanelAnimator.SetBool("_isOpen", false);
             howToPlayPageIndex = 0;
@@ -68,24 +69,22 @@ public class MenuController1 : MonoBehaviour
         Screen.fullScreen = isFullscreen;
     }
 
-    private void SetUpResolutionsSettings() {
+    private void InitializeResolutionsSettings() {
         settingsResolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++) {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
+        for (int i = 0; i < resolutionsWidth.Length; i++) {
+            string option = resolutionsWidth[i] + " x " + resolutionsHeight[i];
             options.Add(option);
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height) {
-                currentResolutionIndex = i;
-            }
         }
+        
         settingsResolutionDropdown.AddOptions(options);
         settingsResolutionDropdown.value = currentResolutionIndex;
         settingsResolutionDropdown.RefreshShownValue();
     }
 
     public void SetResolutionSettings(int resolutionIndex) {
-        Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height, Screen.fullScreen);
+        Screen.SetResolution(resolutionsWidth[resolutionIndex], resolutionsHeight[resolutionIndex], Screen.fullScreen);
     }
 
     //How to play functions go here
