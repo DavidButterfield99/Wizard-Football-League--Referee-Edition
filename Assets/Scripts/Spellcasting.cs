@@ -6,17 +6,25 @@ public class Spellcasting : MonoBehaviour
 {
     public SpellDisplay spellPrefab;
     public SpellSO[] spells;
+    GameManager gameManager;
+
+    void Awake()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
 
     public void CastSpell(SpellSO spellToCast, SoccerPlayer caster)
     {
+        if (gameManager.activeSpellCount < gameManager.maxActiveSpells)
+        {
 
-        
-        SpellDisplay spell = InstantiateSpell(spellToCast, caster);
-        spell.SpawnSpellCircle(spellToCast);
-        spell.transform.SetParent(caster.transform);
+            SpellDisplay spell = InstantiateSpell(spellToCast, caster);
+            spell.SpawnSpellCircle(spellToCast);
+            spell.transform.SetParent(caster.transform);
 
-        StartCoroutine(pendingCast(spell));
-        
+            StartCoroutine(pendingCast(spell));
+        }
+
     }
 
     public IEnumerator pendingCast(SpellDisplay spell)
@@ -26,7 +34,7 @@ public class Spellcasting : MonoBehaviour
         yield return new WaitForSeconds(spellcastingDelay);
 
         List<SoccerPlayer> targets = spell.caster.GetValidSpellTargets();
-        int randomIndex = Random.Range(0,targets.Count);
+        int randomIndex = Random.Range(0, targets.Count);
         SoccerPlayer target = targets[randomIndex];
         spell.target = target;
 
@@ -49,14 +57,14 @@ public class Spellcasting : MonoBehaviour
 
     }
 
-    SpellDisplay InstantiateSpell(SpellSO spellToCast, SoccerPlayer caster, SoccerPlayer target=null)
+    SpellDisplay InstantiateSpell(SpellSO spellToCast, SoccerPlayer caster, SoccerPlayer target = null)
     {
         SpellDisplay spell = Instantiate(spellPrefab, caster.transform.position, spellPrefab.transform.rotation);
         spell.spellSO = spellToCast;
         spell.caster = caster;
         spell.target = target;
 
-        return spell;       
+        return spell;
     }
 
 }

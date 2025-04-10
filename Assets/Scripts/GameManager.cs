@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     GameObject[] team2;
     public List<GameObject> allPlayers;
     List<SpellDisplay> activeSpells;
+    public int activeSpellCount;
+    public int maxActiveSpells = 4;
 
     void Start()
     {
@@ -27,13 +29,19 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         activeSpells = getActiveSpells();
+        activeSpellCount = activeSpells.Count;
 
         foreach (SpellDisplay spell in activeSpells)
         {
-            if (spell.spellSO.spellType == "Attack")
+            try
             {
-                spell.HomeOnPlayer(spell.caster, spell.target);
+                if (spell.spellSO.spellType == "Attack")
+                {
+                    spell.HomeOnPlayer(spell.caster, spell.target);
+                }
+
             }
+            catch { }
         }
     }
 

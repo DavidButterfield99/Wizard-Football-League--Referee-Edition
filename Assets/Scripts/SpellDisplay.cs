@@ -8,6 +8,7 @@ public class SpellDisplay : MonoBehaviour
     public SpellSO spellSO;
     public SoccerPlayer caster;
     public SoccerPlayer target;
+    public bool spellActive = false;
 
 
     private SpriteRenderer rend;
@@ -43,6 +44,7 @@ public class SpellDisplay : MonoBehaviour
     public void SpawnSpellEffect(SpellSO spellToCast)
     {
         rend.sprite = spellToCast.sprite;
+        spellActive = true;
     }
 
     public void HomeOnPlayer(SoccerPlayer caster, SoccerPlayer target)
@@ -56,16 +58,32 @@ public class SpellDisplay : MonoBehaviour
         // Vector3 moveDirection = target.transform.position;
         transform.LookAt(target.transform);
         transform.Translate(Vector3.forward * caster.stats["spellCasting"] * Time.deltaTime);
+
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        SoccerPlayer player;
+        try
+        {
+            player = other.gameObject.GetComponent<SoccerPlayer>();
+            if (player == target)
+            {
+                Debug.Log($"Hit target, hp reduced from {target.stats["healthPoints"]} to {target.stats["healthPoints"] - spellSO.damage}");
+                target.stats["healthPoints"] -= spellSO.damage;
+                Destroy(this.gameObject);
+            }
+        }
+        catch 
+        { }
+        if (other.gameObject.tag.Contains("Team") && spellActive)
+        {
+            // Debug.Log("Colliding");
+
+        }
+        
+
         
     }
 
-    private void OnCollisionEnter(Collision other) {
-        if (other.gameObject == target)
-        {
-            Debug.Log($"Hit target, hp reduced from {target.stats["healthPoints"]} to {target.stats["healthPoints"] - spellSO.damage}");
-            target.stats["healthPoints"] -= spellSO.damage;
-            Destroy(this);
-        }
-    }
-    
 }
