@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0921ae40333cdee46bb12ea46f2810a4
+guid: c063c01f538d99d44ac00cdf4cb7bc10
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,89 +97,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BasicUI_0
+      name: ArrowButtons_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 9
-        width: 64
-        height: 14
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af890c819c47fc14f8c4eb449f45ce2f
-      internalID: 1796155273
+      spriteID: 82a8b5b6637a85947a4c72fe688fe2f7
+      internalID: -1890393205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BasicUI_1
+      name: ArrowButtons_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 9
-        width: 64
-        height: 14
+        x: 16
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3f21d2abd9e06d40a49dd660df8574b
-      internalID: 1307851362
+      spriteID: 2238b1270f1e0a5409c33bbabadce568
+      internalID: -1879917951
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BasicUI_2
+      name: ArrowButtons_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 9
-        width: 64
-        height: 14
+        x: 32
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a134522eccdb0de44a4043fef23668d0
-      internalID: -1719052011
+      spriteID: dfcab36e39096ed4daf34bd69adfa955
+      internalID: -1203326710
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BasicUI_3
+      name: ArrowButtons_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 9
-        width: 64
-        height: 14
+        x: 48
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39fb249ad706cb848993d6fb2ea2cd30
-      internalID: -224961232
+      spriteID: 43c84c3d6acafff429114659f10928ca
+      internalID: 422833399
       vertices: []
       indices: 
       edges: []
@@ -188,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 62ffd4fc8812f1d4f8bbaaacca9d1646
+    spriteID: 0875d74db64552a4c8932df6bedacaad
     internalID: 0
     vertices: []
     indices: 
@@ -198,10 +198,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BasicUI_0: 1796155273
-      BasicUI_1: 1307851362
-      BasicUI_2: -1719052011
-      BasicUI_3: -224961232
+      ArrowButtons_0: -1890393205
+      ArrowButtons_1: -1879917951
+      ArrowButtons_2: -1203326710
+      ArrowButtons_3: 422833399
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
