@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpellDisplay : MonoBehaviour {
+public class SpellDisplay : MonoBehaviour
+{
     public Sprite[] spellCircles;
     public Sprite[] attackSprites;
     public SpellSO spellSO;
@@ -10,8 +11,9 @@ public class SpellDisplay : MonoBehaviour {
 
 
     private SpriteRenderer rend;
-    
-    private void Awake() {
+
+    private void Awake()
+    {
         rend = GetComponent<SpriteRenderer>();
     }
 
@@ -35,7 +37,7 @@ public class SpellDisplay : MonoBehaviour {
             rend.sprite = spellCircles[3];
         }
 
-        rend.color = spellToCast.color;        
+        rend.color = spellToCast.color;
     }
 
     public void SpawnSpellEffect(SpellSO spellToCast)
@@ -47,13 +49,23 @@ public class SpellDisplay : MonoBehaviour {
     {
         if (target == null)
         {
-            Debug.Log("No target found");
             return;
         }
-        Vector3 moveDirection = (target.transform.position - transform.position).normalized;
-        transform.Translate(moveDirection * Time.deltaTime * caster.stats["spellCasting"]);
+        // Vector3 moveDirection = (target.transform.position - transform.position).normalized;
+        // transform.Translate(moveDirection * Time.deltaTime * caster.stats["spellCasting"]);
+        // Vector3 moveDirection = target.transform.position;
+        transform.LookAt(target.transform);
+        transform.Translate(Vector3.forward * caster.stats["spellCasting"] * Time.deltaTime);
+        
     }
 
+    private void OnCollisionEnter(Collision other) {
+        if (other.gameObject == target)
+        {
+            Debug.Log($"Hit target, hp reduced from {target.stats["healthPoints"]} to {target.stats["healthPoints"] - spellSO.damage}");
+            target.stats["healthPoints"] -= spellSO.damage;
+            Destroy(this);
+        }
+    }
     
-
 }

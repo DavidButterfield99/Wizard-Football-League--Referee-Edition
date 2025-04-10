@@ -15,28 +15,28 @@ public class Spellcasting : MonoBehaviour
         spell.SpawnSpellCircle(spellToCast);
         spell.transform.SetParent(caster.transform);
 
-        StartCoroutine(pendingCast(spellToCast, caster));
+        StartCoroutine(pendingCast(spell));
         
     }
 
-    public IEnumerator pendingCast(SpellSO spellToCast, SoccerPlayer caster)
+    public IEnumerator pendingCast(SpellDisplay spell)
     {
-        float spellcastingDelay = 100 / caster.stats["spellCasting"];
+        float spellcastingDelay = 100 / spell.caster.stats["spellCasting"];
 
-        List<SoccerPlayer> targets = caster.GetValidSpellTargets();
+        yield return new WaitForSeconds(spellcastingDelay);
+
+        List<SoccerPlayer> targets = spell.caster.GetValidSpellTargets();
         int randomIndex = Random.Range(0,targets.Count);
         SoccerPlayer target = targets[randomIndex];
+        spell.target = target;
 
-        Debug.Log($"target : {target}");
-
-        AttackSpell(spellToCast, caster, target);
-        yield return new WaitForSeconds(spellcastingDelay);
+        AttackSpell(spell);
     }
 
-    private void AttackSpell(SpellSO spellToCast, SoccerPlayer caster, SoccerPlayer target)
+    private void AttackSpell(SpellDisplay spell)
     {
-        SpellDisplay spell = InstantiateSpell(spellToCast, caster, target);
-        spell.SpawnSpellEffect(spellToCast);
+        spell.transform.SetParent(null);
+        spell.SpawnSpellEffect(spell.spellSO);
     }
 
     private void BuffSpell()

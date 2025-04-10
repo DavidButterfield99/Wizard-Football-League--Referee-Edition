@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 129619106}
   m_Layer: 0
   m_Name: Referee
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -602,6 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9c474212738287aaeec73f7c5a996f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allPlayers: []
 --- !u!4 &747481755
 Transform:
   m_ObjectHideFlags: 0

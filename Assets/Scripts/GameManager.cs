@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
         team2 = GameObject.FindGameObjectsWithTag("Team 2");
         foreach (var player in team1)
         {
-            Debug.Log(player);
             allPlayers.Add(player);
         }
 
@@ -33,7 +32,6 @@ public class GameManager : MonoBehaviour
         {
             if (spell.spellSO.spellType == "Attack")
             {
-                Debug.Log($"spell.caster: {spell.caster}, spell.target: {spell.target}");
                 spell.HomeOnPlayer(spell.caster, spell.target);
             }
         }
