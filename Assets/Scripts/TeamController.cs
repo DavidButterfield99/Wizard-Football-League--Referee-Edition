@@ -16,7 +16,7 @@ public class TeamController : MonoBehaviour
 
     float minDistanceFromClosestPlayer = 100f;
 
-    private void Start()
+    private void Awake()
     {
         ball = GameObject.Find("Ball");
         SpawnPlayers();
