@@ -25,17 +25,12 @@ public class SoccerPlayer : MonoBehaviour
     public bool isCasting = false;
     public int foulsNum = 0;
 
-    private GameManager gameManager;
-
-
-
     private void Awake()
     {
         ball = GameObject.Find("Ball");
         ballRb = ball.GetComponent<Rigidbody>();
         playerRb = GetComponent<Rigidbody>();
         spellcasting = GetComponent<Spellcasting>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         GenerateStats(90);
     }
 
@@ -132,9 +127,9 @@ public class SoccerPlayer : MonoBehaviour
     {
         List<SoccerPlayer> targets = new List<SoccerPlayer>();
 
-        for (int i = 0; i < gameManager.allPlayers.Count; i++)
+        for (int i = 0; i < GameManager.allPlayers.Count; i++)
         {
-            SoccerPlayer player = gameManager.allPlayers[i].GetComponent<SoccerPlayer>();
+            SoccerPlayer player = GameManager.allPlayers[i].GetComponent<SoccerPlayer>();
             if (player.team != team)
             {
                 targets.Add(player);

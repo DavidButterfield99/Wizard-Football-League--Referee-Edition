@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-    GameObject[] team1;
-    GameObject[] team2;
-    public List<GameObject> allPlayers;
+    static public List<GameObject> allPlayers;
     List<SpellDisplay> activeSpells;
     public int activeSpellCount;
     public int maxActiveBuffs = 4;
@@ -24,24 +22,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        team1 = GameObject.FindGameObjectsWithTag("Team 1");
-        team2 = GameObject.FindGameObjectsWithTag("Team 2");
-        foreach (var player in team1)
+        allPlayers = GameObject.FindGameObjectsWithTag("SoccerPlayerTag").ToList();
+        foreach (var player in allPlayers)
         {
-            allPlayers.Add(player);
             playerPoolCurrent.Add(player.GetComponent<SoccerPlayer>());
         }
 
-        foreach (var player in team2)
-        {
-            allPlayers.Add(player);
-            playerPoolCurrent.Add(player.GetComponent<SoccerPlayer>());
-        }
-
-        foreach (var spell in SpellsPoolOriginal)
-        {
-            SpellsPoolCurrent.Add(spell);
-        }
+        SpellsPoolCurrent.AddRange(SpellsPoolOriginal);
 
         StartCoroutine("spellcastCoroutine");
     }
@@ -78,14 +65,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         Debug.Log(playerPoolCurrent.Count);
-        int playerIndex = Random.Range(0, playerPoolCurrent.Count);
-        SoccerPlayer player = playerPoolCurrent[playerIndex];
-        playerPoolCurrent.RemoveAt(playerIndex);
 
-        int spellIndex = Random.Range(0, SpellsPoolCurrent.Count);
-        SpellSO spell = SpellsPoolCurrent[spellIndex];
-        SpellsPoolCurrent.RemoveAt(spellIndex);
-
+        SpellSO spell = SelectElement(ref SpellsPoolCurrent);
+        SoccerPlayer player = SelectElement(ref playerPoolCurrent);
 
         player.spellcasting.CastSpell(spell, player);
         player.isCasting = true;
@@ -103,5 +85,14 @@ public class GameManager : MonoBehaviour
         }
 
         return activeSpells;
+    }
+
+    private T SelectElement<T>(ref List<T> pool)
+    {
+        int itemIndex = Random.Range(0, pool.Count);
+        T item = pool[itemIndex];
+        pool.RemoveAt(itemIndex);
+
+        return item;
     }
 }

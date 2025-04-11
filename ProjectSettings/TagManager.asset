@@ -7,6 +7,7 @@ TagManager:
   - Team 1
   - Team 2
   - Spell
+  - SoccerPlayerTag
   layers:
   - Default
   - TransparentFX

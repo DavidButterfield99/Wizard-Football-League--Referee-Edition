@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -2220123393852672370}
   m_Layer: 0
   m_Name: Player Team 2
-  m_TagString: Team 2
+  m_TagString: SoccerPlayerTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,6 +157,8 @@ MonoBehaviour:
   defenceZone: 0
   goalObject: {fileID: 0}
   spellcasting: {fileID: 0}
+  isCasting: 0
+  foulsNum: 0
 --- !u!114 &-2220123393852672370
 MonoBehaviour:
   m_ObjectHideFlags: 0
