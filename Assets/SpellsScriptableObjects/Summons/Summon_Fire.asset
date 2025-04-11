@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990260a87f5b9d10da4f4e1c409bceeb, type: 3}
   m_Name: Summon_Fire
   m_EditorClassIdentifier: 
-  spellName: 
-  spellType: 
+  spellName: Fire
+  spellType: Summon
   spellDuration: 0
   damage: 0
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 0, b: 0, a: 1}
   sprite: {fileID: 0}

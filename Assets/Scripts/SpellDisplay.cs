@@ -44,6 +44,7 @@ public class SpellDisplay : MonoBehaviour
     public void SpawnSpellEffect(SpellSO spellToCast)
     {
         rend.sprite = spellToCast.sprite;
+        rend.color = Color.white;
         spellActive = true;
     }
 

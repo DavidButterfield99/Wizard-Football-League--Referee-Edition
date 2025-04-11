@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990260a87f5b9d10da4f4e1c409bceeb, type: 3}
   m_Name: Cause Fear
   m_EditorClassIdentifier: 
-  spellName: Fireball
+  spellName: Cause Fear
   spellType: Attack
   spellDuration: 0
-  damage: 20
+  damage: 5
   color: {r: 0, g: 0, b: 0, a: 1}
-  sprite: {fileID: 21300000, guid: 87111774723695644969a0c8ab0b9ab8, type: 3}
+  sprite: {fileID: 21300000, guid: 27428353eebc9c24184addfac12b8f71, type: 3}
