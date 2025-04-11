@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuController1 : MonoBehaviour
 {
@@ -36,8 +37,7 @@ public class MenuController1 : MonoBehaviour
             InitializeResolutionsSettings();
         }
 
-        if (howToPlayPanel != null) {
-            Debug.Log("I am initializing how to play!");
+        if (howToPlayPanel != null) {  
             howToPlayPanelAnimator = howToPlayPanel.GetComponent<Animator>();
             howToPlayPanelAnimator.SetBool("_isOpen", false);
             howToPlayPageIndex = 0;
@@ -45,6 +45,11 @@ public class MenuController1 : MonoBehaviour
         }
 
         
+    }
+
+    //Starting Game related things go here:
+    public void StartGame() {
+        SceneManager.LoadScene(1);
     }
 
     //Credits related things go here:
