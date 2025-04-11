@@ -17,8 +17,10 @@ public class GameManager : MonoBehaviour
     static public bool gameOver = false;
 
     private List<SoccerPlayer> playerPoolCurrent = new List<SoccerPlayer>();
-    private List<SpellSO> SpellsPoolOriginal = new List<SpellSO>();
+    public List<SpellSO> SpellsPoolOriginal = new List<SpellSO>();
     private List<SpellSO> SpellsPoolCurrent = new List<SpellSO>();
+    private int WAIT_TIME_MIN = 2;
+    private int WAIT_TIME_MAX = 5;
 
     void Start()
     {
@@ -27,11 +29,18 @@ public class GameManager : MonoBehaviour
         foreach (var player in team1)
         {
             allPlayers.Add(player);
+            playerPoolCurrent.Add(player.GetComponent<SoccerPlayer>());
         }
 
         foreach (var player in team2)
         {
             allPlayers.Add(player);
+            playerPoolCurrent.Add(player.GetComponent<SoccerPlayer>());
+        }
+
+        foreach (var spell in SpellsPoolOriginal)
+        {
+            SpellsPoolCurrent.Add(spell);
         }
 
         StartCoroutine("spellcastCoroutine");
@@ -65,17 +74,23 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator spellcastCoroutine()
     {
-        int waitTime = Random.Range(10, 20);
+        int waitTime = Random.Range(WAIT_TIME_MIN, WAIT_TIME_MAX);
         yield return new WaitForSeconds(waitTime);
 
         Debug.Log(playerPoolCurrent.Count);
-        int selection = Random.Range(0, playerPoolCurrent.Count);
-        SoccerPlayer player = playerPoolCurrent[selection];
-        playerPoolCurrent.RemoveAt(selection);
+        int playerIndex = Random.Range(0, playerPoolCurrent.Count);
+        SoccerPlayer player = playerPoolCurrent[playerIndex];
+        playerPoolCurrent.RemoveAt(playerIndex);
+
+        int spellIndex = Random.Range(0, SpellsPoolCurrent.Count);
+        SpellSO spell = SpellsPoolCurrent[spellIndex];
+        SpellsPoolCurrent.RemoveAt(spellIndex);
 
 
-        player.spellcasting.CastSpell(player.spellcasting.spells[0], player);
+        player.spellcasting.CastSpell(spell, player);
         player.isCasting = true;
+
+        StartCoroutine(spellcastCoroutine());
     }
 
     List<SpellDisplay> getActiveSpells()
