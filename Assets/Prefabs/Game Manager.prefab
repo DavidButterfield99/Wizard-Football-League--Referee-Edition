@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9c474212738287aaeec73f7c5a996f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allPlayers: []
   activeSpellCount: 0
   maxActiveBuffs: 4
   maxActiveSummons: 2
@@ -57,3 +56,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3eae67b4232d3a386a4e522205ba617b, type: 2}
   - {fileID: 11400000, guid: 1cf1f848065f0438793e26d782b4ef9c, type: 2}
   - {fileID: 11400000, guid: 3e2d07ba4afea4b658b7ff04e637ed6a, type: 2}
+  - {fileID: 11400000, guid: ad6148e6f787a9c4aabaedaaf68f8960, type: 2}
+  - {fileID: 11400000, guid: 8e4363e07f4cc57659de36e138addcf2, type: 2}
+  - {fileID: 11400000, guid: c718a4e2607b6b2b8a14cd73673f447a, type: 2}
+  - {fileID: 11400000, guid: 5576fa165f69a9490b7adcd69bc4d64f, type: 2}
+  - {fileID: 11400000, guid: a13657957d900f5168564662c840cd28, type: 2}
+  - {fileID: 11400000, guid: 2ab19920025127fe6a51b94cfc4f4c7f, type: 2}
+  - {fileID: 11400000, guid: b408b42c89cb2b2b7a05646324bfd99b, type: 2}
+  - {fileID: 11400000, guid: f4cdb2f971c32c77088e5ab395cdd611, type: 2}
+  - {fileID: 11400000, guid: a7904dd68400f3c22b5dfbf6d451161b, type: 2}
+  - {fileID: 11400000, guid: 72dbbfdf9dd607cc493181c9f11f20b2, type: 2}
+  - {fileID: 11400000, guid: a5b5657bc9b3390c89fe60906c363084, type: 2}
+  - {fileID: 11400000, guid: 8e4f38277cac94e7195236603bccc6e9, type: 2}

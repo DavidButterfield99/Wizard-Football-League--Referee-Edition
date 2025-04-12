@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,10 +20,16 @@ public class Spellcasting : MonoBehaviour
         spell.SpawnSpellCircle(spellToCast);
         spell.transform.SetParent(caster.transform);
 
-        StartCoroutine(pendingCast(spell));
+        Action spellAction = null;
+
+        if (spell.spellSO.spellType == "Attack") spellAction = () => AttackSpell(spell);
+        if (spell.spellSO.spellType == "Buff") spellAction = () => BuffSpell(spell);
+        if (spell.spellSO.spellType == "Summon") spellAction = () => SummonSpell(spell);
+
+        StartCoroutine(pendingCast(spell, spellAction));
     }
 
-    public IEnumerator pendingCast(SpellDisplay spell)
+    public IEnumerator pendingCast(SpellDisplay spell, Action spellAction)
     {
         float spellcastingDelay = 100 / spell.caster.stats["spellCasting"];
 
@@ -30,11 +37,11 @@ public class Spellcasting : MonoBehaviour
         spell.caster.isCasting = false;
 
         List<SoccerPlayer> targets = spell.caster.GetValidSpellTargets();
-        int randomIndex = Random.Range(0, targets.Count);
+        int randomIndex = UnityEngine.Random.Range(0, targets.Count);
         SoccerPlayer target = targets[randomIndex];
         spell.target = target;
 
-        AttackSpell(spell);
+        spellAction?.Invoke();
     }
 
     private void AttackSpell(SpellDisplay spell)
@@ -43,14 +50,14 @@ public class Spellcasting : MonoBehaviour
         spell.SpawnSpellEffect(spell.spellSO);
     }
 
-    private void BuffSpell()
+    private void BuffSpell(SpellDisplay spell)
     {
-
+        Debug.Log($"Buff spell {spell.spellSO.spellName}");
     }
 
-    private void SummonSpell()
+    private void SummonSpell(SpellDisplay spell)
     {
-
+        Debug.Log($"Summon spell {spell.spellSO.spellName}");
     }
 
     SpellDisplay InstantiateSpell(SpellSO spellToCast, SoccerPlayer caster, SoccerPlayer target = null)
