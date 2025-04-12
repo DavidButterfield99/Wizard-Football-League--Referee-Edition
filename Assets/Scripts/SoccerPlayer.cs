@@ -49,6 +49,20 @@ public class SoccerPlayer : MonoBehaviour
         return distance;
     }
 
+    public Dictionary<SoccerPlayer, float> GetDistanceToPlayers()
+    {
+        Dictionary<SoccerPlayer, float> distances = new Dictionary<SoccerPlayer, float>();
+        foreach (var player in GameManager.allPlayers)
+        {
+            SoccerPlayer soccerPlayer = player.GetComponent<SoccerPlayer>();
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+
+            distances.Add(soccerPlayer, distance);
+        }
+
+        return distances;
+    }
+
     public void RunTowardsBall()
     {
         if (transform.position.y < 20)
@@ -143,12 +157,12 @@ public class SoccerPlayer : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("OnMouseDown");
-        
-            if (isCasting)
-            {
-                foulsNum++;
-            }
-        
+
+        if (isCasting)
+        {
+            foulsNum++;
+        }
+
     }
 
 }

@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour
     public int activeSpellCount;
     public int maxActiveBuffs = 4;
     public int maxActiveSummons = 2;
-    public int activeBuffs = 0;
-    public int activeSUmmons = 0;
+    static public int activeBuffs = 0;
+    static public int activeSummons = 0;
     static public bool gameOver = false;
 
     private List<SoccerPlayer> playerPoolOriginal = new List<SoccerPlayer>();
     private List<SoccerPlayer> playerPoolCurrent = new List<SoccerPlayer>();
     public List<SpellSO> SpellsPoolOriginal = new List<SpellSO>();
-    private List<SpellSO> SpellsPoolCurrent = new List<SpellSO>();
+    public List<SpellSO> SpellsPoolCurrent = new List<SpellSO>();
     private int WAIT_TIME_MIN = 2;
     private int WAIT_TIME_MAX = 5;
 
@@ -26,9 +26,10 @@ public class GameManager : MonoBehaviour
         allPlayers = GameObject.FindGameObjectsWithTag("SoccerPlayerTag").ToList();
         foreach (var player in allPlayers)
         {
-            playerPoolCurrent.Add(player.GetComponent<SoccerPlayer>());
+            playerPoolOriginal.Add(player.GetComponent<SoccerPlayer>());
         }
 
+        playerPoolCurrent.AddRange(playerPoolOriginal);
         SpellsPoolCurrent.AddRange(SpellsPoolOriginal);
 
         StartCoroutine("spellcastCoroutine");
@@ -68,7 +69,14 @@ public class GameManager : MonoBehaviour
         Debug.Log(playerPoolCurrent.Count);
 
         SpellSO spell = PoolHandler(ref SpellsPoolCurrent, SpellsPoolOriginal);
+        while (spell.spellType == "Buff" && activeBuffs == maxActiveBuffs || spell.spellType == "Summon" && activeSummons == maxActiveSummons)
+        {
+            SpellsPoolCurrent.Append(spell);
+            spell = PoolHandler(ref SpellsPoolCurrent, SpellsPoolOriginal);
+        }
+
         SoccerPlayer player = PoolHandler(ref playerPoolCurrent, playerPoolCurrent);
+
 
         player.spellcasting.CastSpell(spell, player);
         player.isCasting = true;

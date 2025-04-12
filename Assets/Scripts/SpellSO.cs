@@ -5,6 +5,7 @@ public class SpellSO : ScriptableObject {
     public string spellName;
     public string spellType;
     public float spellDuration;
+    public float range;
     public int damage;
     public Color color;
     public Sprite sprite;

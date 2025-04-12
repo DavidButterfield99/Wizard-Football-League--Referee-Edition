@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Spellcasting : MonoBehaviour
@@ -52,12 +53,34 @@ public class Spellcasting : MonoBehaviour
 
     private void BuffSpell(SpellDisplay spell)
     {
+        Dictionary<SoccerPlayer, float> distances = spell.caster.GetDistanceToPlayers();
+        GameManager.activeBuffs++;
+
+        // Filter by spell range
+        distances = distances
+        .Where(pair => pair.Value < spell.spellSO.range)
+        .ToDictionary(pair => pair.Key, pair => pair.Value);
+
+        foreach (var item in distances)
+        {
+            Debug.Log($"{item.Key} : {item.Value}");
+        }
+
         Debug.Log($"Buff spell {spell.spellSO.spellName}");
     }
 
     private void SummonSpell(SpellDisplay spell)
     {
+        GameManager.activeSummons++;
         Debug.Log($"Summon spell {spell.spellSO.spellName}");
+    }
+
+
+    private IEnumerator SpellTimeLimitCoroutine(SpellDisplay spell)
+    {
+        yield return new WaitForSeconds(spell.spellSO.spellDuration);
+        Destroy(spell.gameObject);
+
     }
 
     SpellDisplay InstantiateSpell(SpellSO spellToCast, SoccerPlayer caster, SoccerPlayer target = null)
@@ -69,5 +92,4 @@ public class Spellcasting : MonoBehaviour
 
         return spell;
     }
-
 }
