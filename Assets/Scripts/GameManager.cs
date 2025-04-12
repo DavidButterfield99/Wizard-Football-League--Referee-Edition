@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int activeSUmmons = 0;
     static public bool gameOver = false;
 
+    private List<SoccerPlayer> playerPoolOriginal = new List<SoccerPlayer>();
     private List<SoccerPlayer> playerPoolCurrent = new List<SoccerPlayer>();
     public List<SpellSO> SpellsPoolOriginal = new List<SpellSO>();
     private List<SpellSO> SpellsPoolCurrent = new List<SpellSO>();
@@ -66,8 +67,8 @@ public class GameManager : MonoBehaviour
 
         Debug.Log(playerPoolCurrent.Count);
 
-        SpellSO spell = SelectElement(ref SpellsPoolCurrent);
-        SoccerPlayer player = SelectElement(ref playerPoolCurrent);
+        SpellSO spell = PoolHandler(ref SpellsPoolCurrent, SpellsPoolOriginal);
+        SoccerPlayer player = PoolHandler(ref playerPoolCurrent, playerPoolCurrent);
 
         player.spellcasting.CastSpell(spell, player);
         player.isCasting = true;
@@ -87,8 +88,13 @@ public class GameManager : MonoBehaviour
         return activeSpells;
     }
 
-    private T SelectElement<T>(ref List<T> pool)
+    private T PoolHandler<T>(ref List<T> pool, List<T> poolRefill)
     {
+        if (pool.Count == 0)
+        {
+            pool.AddRange(poolRefill);
+        }
+
         int itemIndex = Random.Range(0, pool.Count);
         T item = pool[itemIndex];
         pool.RemoveAt(itemIndex);
