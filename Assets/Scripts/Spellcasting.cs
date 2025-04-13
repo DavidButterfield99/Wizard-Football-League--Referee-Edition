@@ -61,9 +61,22 @@ public class Spellcasting : MonoBehaviour
         .Where(pair => pair.Value < spell.spellSO.range)
         .ToDictionary(pair => pair.Key, pair => pair.Value);
 
-        foreach (var item in distances)
+        List<SoccerPlayer> enemiesInRange = GetEnemiesInRange(spell.caster, distances);
+        List<SoccerPlayer> teammatesInRange = GetTeammatesInRange(spell.caster, distances);
+        if (enemiesInRange.Count != 0)
         {
-            Debug.Log($"{item.Key} : {item.Value}");
+            int randomIndex = UnityEngine.Random.Range(0, enemiesInRange.Count);
+            spell.target = enemiesInRange[randomIndex];
+        }
+        else if (teammatesInRange.Count != 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, teammatesInRange.Count);
+            spell.target = teammatesInRange[randomIndex];
+        }
+        else 
+        {
+            // No one in range, target self.
+            spell.target = spell.caster;
         }
 
         Debug.Log($"Buff spell {spell.spellSO.spellName}");
@@ -80,7 +93,26 @@ public class Spellcasting : MonoBehaviour
     {
         yield return new WaitForSeconds(spell.spellSO.spellDuration);
         Destroy(spell.gameObject);
+    }
 
+    private List<SoccerPlayer> GetEnemiesInRange(SoccerPlayer caster, Dictionary<SoccerPlayer, float> distances)
+    {
+        List<SoccerPlayer> enemiesInRange = distances
+        .Keys
+        .Where(player => player.team != caster.team)
+        .ToList();
+
+        return enemiesInRange;
+    }
+
+    private List<SoccerPlayer> GetTeammatesInRange(SoccerPlayer caster, Dictionary<SoccerPlayer, float> distances)
+    {
+        List<SoccerPlayer> teammatesInRange = distances
+        .Keys
+        .Where(player => player.team == caster.team)
+        .ToList();
+
+        return teammatesInRange;
     }
 
     SpellDisplay InstantiateSpell(SpellSO spellToCast, SoccerPlayer caster, SoccerPlayer target = null)
